@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>HW4</title>
+</head>
+<body>
+    <h1>What is Lorem Ipsum?</h1>
+    <ul id="newsList"></ul>
+
+    <script>
+       var newsArray = [
+            
+
+"Proin dictum nibh mollis, mollis magna sed, interdum purus. Maecenas viverra lorem id iaculis lobortis. In id dolor a leo elementum rhoncus at sit amet nunc. Fusce iaculis vulputate diam, eu vulputate velit ultrices imperdiet. In scelerisque nisi orci, in imperdiet lacus porttitor non. In sit amet tortor quis magna fermentum pellentesque. Vivamus sodales posuere urna, vitae hendrerit ipsum rhoncus vitae. Morbi a mauris eget felis suscipit dictum id ac erat. Ut diam ex, vulputate a eleifend et, imperdiet vitae elit. Sed ac sem vel justo finibus interdum. Vestibulum neque dolor, pharetra ut ligula quis, hendrerit euismod magna. Nulla ultricies cursus molestie. Nunc vitae ligula dapibus orci interdum convallis ac fringilla turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed bibendum sollicitudin odio, et pellentesque mauris lobortis ac.",
+"Nam mollis ipsum vel purus auctor fringilla. Sed nec condimentum nisl. Sed nulla mi, tincidunt a facilisis vitae, vulputate a ipsum. Fusce finibus, leo ut iaculis sollicitudin, odio elit finibus turpis, id semper sapien dolor id sapien. Duis mattis placerat sapien vitae ornare. Maecenas tellus lorem, aliquam sagittis ultricies auctor, molestie ut felis. Morbi dignissim felis non tempus laoreet. Curabitur ultrices consequat aliquet. Proin pretium porta aliquam. Sed vitae urna urna. Quisque luctus neque in eros dictum, vitae tempus quam tristique. Curabitur pulvinar ut urna quis hendrerit. Nulla placerat magna et tortor facilisis, quis iaculis odio imperdiet. Nulla maximus erat efficitur erat convallis pulvinar.",
+"Vivamus eget lobortis nulla. Nam quis efficitur lectus. Vivamus id nisl ac nulla blandit fringilla. Proin auctor sagittis quam gravida posuere. Donec sollicitudin lorem sed vestibulum sagittis. Pellentesque sit amet dui mattis, rutrum enim eget, vehicula mauris. Vestibulum non ante efficitur, luctus ligula non, pellentesque sem. Duis quis rhoncus dui. Etiam non porta ligula. Suspendisse dapibus sollicitudin vehicula. Phasellus non tincidunt lorem, ac vulputate diam. Proin eleifend urna odio. Praesent condimentum pharetra aliquam. Pellentesque tempor justo felis, vel congue justo suscipit at. Fusce tortor mi, interdum eget velit id, facilisis finibus urna.",
+"In hac habitasse platea dictumst. Cras rutrum justo id sapien placerat, a porttitor nunc rutrum. Ut ac ipsum finibus, mattis augue sed, varius magna. Sed dignissim dictum ante vel porttitor. Praesent volutpat erat felis, ut blandit neque vehicula eget. Ut et dui condimentum, molestie nisl id, imperdiet nisi. Sed nisl metus, tempor a sodales non, dapibus pharetra nibh. Donec venenatis eleifend sapien ac euismod. Nunc tristique feugiat ipsum sed pharetra. Nam posuere interdum odio sed elementum. Ut in nisl eu odio sagittis tincidunt et ac turpis. Pellentesque massa nibh, faucibus ac lobortis vel, cursus sit amet arcu. Nulla ac tincidunt sem. Nulla id euismod metus, sed feugiat ipsum."
+        ];
+
+       var newsListElement = document.getElementById("newsList");
+     function addNewsToList(news) {
+      var li = document.createElement("li");
+      li.textContent = news;
+      newsListElement.appendChild(li);
+    }
+    function checkScroll() {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+          for (var i = 0; i < 5; i++) {
+          var news = newsArray.shift();
+          if (news) {
+            addNewsToList(news);
+          } else {
+            break;
+          }
+        }
+      }
+    }
+
+   window.addEventListener("scroll", checkScroll);
+
+    checkScroll();
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HW5</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      padding: 10px;
+    }
+    td {
+      border: 1px solid black;
+      padding: 5px;
+      text-align: center;
+    }
+    th {
+      padding: 5px;
+      text-align: center;
+    }
+    button {
+      background-color: lightgray;
+      padding: 5px 135px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+   <label for="month">Month: </label>
+  <input type="number" id="month" min="1" max="12">
+
+  <label for="year">Year: </label>
+  <input type="number" id="year">
+  <br>
+  <br>
+  <button onclick="generateCalendar()">Generate</button>
+  <br>
+  <br>
+  <div id="month-year"></div>
+  <div id="calendar"></div>
+
+  <script>
+    function generateCalendar() {
+      var monthInput = document.getElementById('month');
+      var yearInput = document.getElementById('year');
+      var calendarContainer = document.getElementById('calendar');
+      var monthYearContainer = document.getElementById('month-year');
+      
+      var month = parseInt(monthInput.value);
+      var year = parseInt(yearInput.value);
+     
+      if (isNaN(month) || isNaN(year) || month < 1 || month > 12) {
+        alert('Пожалуйста, введите корректные значения для номера месяца и года');
+        return;
+      }
+      
+      var date = new Date(year, month - 1, 1);
+      
+      var firstDay = (date.getDay() + 6) % 7; 
+      
+      var lastDay = new Date(year, month, 0).getDate();
+     
+      var table = document.createElement('table');
+      var tableBody = document.createElement('tbody');
+      
+      var weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+      var weekdaysRow = document.createElement('tr');
+      for (var i = 0; i < 7; i++) {
+        var weekdayCell = document.createElement('th');
+        weekdayCell.textContent = weekdays[i];
+        weekdaysRow.appendChild(weekdayCell);
+      }
+      tableBody.appendChild(weekdaysRow);
+    
+      var dateNum = 1;
+      for (var i = 0; i < 6; i++) {
+        var row = document.createElement('tr');
+
+        for (var j = 0; j < 7; j++) {
+          if (i === 0 && j < firstDay) {
+            
+            var cell = document.createElement('td');
+            row.appendChild(cell);
+          }
+          else if (dateNum > lastDay) {
+               break;
+          }
+          else {
+            var cell = document.createElement('td');
+            cell.textContent = dateNum;
+            row.appendChild(cell);
+            dateNum++;
+          }
+        }
+
+        tableBody.appendChild(row);
+      }
+
+      table.appendChild(tableBody);
+      calendarContainer.innerHTML = '';
+      calendarContainer.appendChild(table);
+              
+      var monthYearString = getMonthName(month) + ' ' + year;
+      monthYearContainer.textContent = monthYearString;
+    }
+    
+    function getMonthName(month) {
+      var months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      return months[month - 1];
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <title>HW1</title>
+     
+   <style>
+   #slider {
+  width: 200px;
+  height: 10px;
+  background-color: lightgray;
+  position: relative;
+  cursor: pointer;
+}
+
+#slider::before {
+ content: "";
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  position: absolute;
+  top: -5px;
+  left: var(--value, 0); 
+  cursor: pointer;
+}
+
+    </style> 
+  
+</head>
+<body>
+  <div id="slider"></div>
+  <script > 
+ "use strict";
+
+var slider = document.getElementById("slider");
+var value = document.getElementById("value");
+var isDragging = false;
+
+slider.addEventListener("mousedown", startDrag);
+
+function startDrag(e) {
+  isDragging = true;
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("mouseup", stopDrag);
+}
+
+function drag(e) {
+  if (!isDragging) return;
+
+  var sliderRect = slider.getBoundingClientRect();
+  var sliderWidth = slider.offsetWidth;
+
+  var left = e.clientX - sliderRect.left;
+
+  if (left < 0) {
+    left = 0;
+  } else if (left > sliderWidth) {
+    left = sliderWidth;
+  }
+
+  /*var percentage = (left / sliderWidth) * 100;*/
+  slider.style.setProperty("--value", left + "px"/*percentage + "%"*/);
+}
+
+function stopDrag() {
+  isDragging = false;
+  document.removeEventListener("mousemove", drag);
+  document.removeEventListener("mouseup", stopDrag);
+}
+
+    </script>
+</body>
+</html>
